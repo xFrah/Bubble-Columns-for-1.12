@@ -14,7 +14,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0.6'
+version = '1.0.7'
 group = 'com.xFra.113_water_mechanics' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'bubble_columns_backport'
 

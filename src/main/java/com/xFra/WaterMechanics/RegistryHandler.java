@@ -50,15 +50,13 @@ public class RegistryHandler
 	@EventBusSubscriber(value = Side.CLIENT, modid = WaterMechanicsCore.MODID)
 	public static class ClientRegistryHandler {
 		@SubscribeEvent
-		public static void onModelRegister(ModelRegistryEvent event) {
-			StateMapperBase ignoreState = new StateMapperBase() {
-				@Override
-				protected ModelResourceLocation getModelResourceLocation(IBlockState state) {
-					return new ModelResourceLocation("minecraft:water", "level=0");
+		public static void registerBlockColors(net.minecraftforge.client.event.ColorHandlerEvent.Block event) {
+			event.getBlockColors().registerBlockColorHandler((state, world, pos, tintIndex) -> {
+				if (world != null && pos != null) {
+					return net.minecraft.world.biome.BiomeColorHelper.getWaterColorAtPos(world, pos);
 				}
-			};
-			ModelLoader.setCustomStateMapper(DOWNWARDS_BUBBLE_COLUMN, ignoreState);
-			ModelLoader.setCustomStateMapper(UPWARDS_BUBBLE_COLUMN, ignoreState);
+				return -1;
+			}, DOWNWARDS_BUBBLE_COLUMN, UPWARDS_BUBBLE_COLUMN);
 		}
 	}
 }
